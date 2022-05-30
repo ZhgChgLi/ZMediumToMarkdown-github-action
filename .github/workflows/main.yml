@@ -1,4 +1,4 @@
-name: Fetch App Review
+name: ZMediumToMarkdown
 on:
   workflow_dispatch:
   #schedule:
@@ -10,27 +10,16 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          path: current
-      - uses: actions/checkout@v2
-        with:
           repository: ZhgChgLi/ZMediumToMarkdown
-          path: main
-      - uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
-          working-directory: main
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.6.5
           bundler-cache: true
-          working-directory: current
-      - run: bundle exec ruby bin/ZMediumToMarkdown -u zhgchgli
-        working-directory: current
-      - working-directory: current
-        run: |
+      - run: bundle exec ruby bin/ZMediumToMarkdown -p https://medium.com/pinkoi-engineering/%E5%AF%A6%E6%88%B0%E7%B4%80%E9%8C%84-4-%E5%80%8B%E5%A0%B4%E6%99%AF-7-%E5%80%8B-design-patterns-78507a8de6a5
+      - run: |
             git config --global user.name 'ZMediumToMarkdown'
             git config --global user.email 'service@zhgchg.li'
-            git add --all
+            git add Output/. 
             
             if [ -n "$(git status --porcelain)" ]; then
               git commit -m "[ZMediumToMarkdown] Fetch new posts..."
