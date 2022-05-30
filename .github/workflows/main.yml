@@ -1,0 +1,38 @@
+name: Fetch App Review
+on:
+  workflow_dispatch:
+  #schedule:
+  #  - cron: "15 */6 * * *"
+    
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          path: current
+      - uses: actions/checkout@v2
+        with:
+          repository: ZhgChgLi/ZMediumToMarkdown
+          path: main
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+          working-directory: main
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.6.5
+          bundler-cache: true
+          working-directory: current
+      - run: bundle exec ruby bin/ZMediumToMarkdown -u zhgchgli
+        working-directory: current
+      - working-directory: current
+        run: |
+            git config --global user.name 'ZMediumToMarkdown'
+            git config --global user.email 'service@zhgchg.li'
+            git add --all
+            
+            if [ -n "$(git status --porcelain)" ]; then
+              git commit -m "[ZMediumToMarkdown] Fetch new posts..."
+              git push origin HEAD:main -f
+            fi
