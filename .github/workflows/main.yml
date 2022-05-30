@@ -3,25 +3,37 @@ on:
   workflow_dispatch:
   #schedule:
   #  - cron: "15 */6 * * *"
-    
+
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
+          path: current
+      - uses: actions/checkout@v3
+        with:
           repository: ZhgChgLi/ZMediumToMarkdown
+          path: main
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.6.5
           bundler-cache: true
+          working-directory: main
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+          working-directory: current
       - run: bundle exec ruby bin/ZMediumToMarkdown -p https://medium.com/pinkoi-engineering/%E5%AF%A6%E6%88%B0%E7%B4%80%E9%8C%84-4-%E5%80%8B%E5%A0%B4%E6%99%AF-7-%E5%80%8B-design-patterns-78507a8de6a5
-      - run: |
+        working-directory: main
+      - working-directory: current
+        run: |
             git config --global user.name 'ZMediumToMarkdown'
             git config --global user.email 'service@zhgchg.li'
-            git add Output/. 
-            
+            if [ -d ${{ github.workspace }}/main/Output/ ]; then
+              cp ${{ github.workspace }}/main/Output ${{ github.workspace }}/current
+              git add .
+            fi
             if [ -n "$(git status --porcelain)" ]; then
-              git commit -m "[ZMediumToMarkdown] Fetch new posts..."
+              git commit -m "Update ZReviewsBot LastModified"
               git push origin HEAD:main -f
             fi
