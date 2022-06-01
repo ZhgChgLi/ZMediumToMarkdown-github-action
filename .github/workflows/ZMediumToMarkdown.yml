@@ -17,10 +17,8 @@ jobs:
       - run: |
             git config --global user.name 'ZMediumToMarkdown'
             git config --global user.email 'service@zhgchg.li'
-            if [ -d ${{ github.workspace }}/main/Output/ ]; then
-              cp ${{ github.workspace }}/main/Output ${{ github.workspace }}/current
-              git add .
-            fi
+            git add .
+            
             if [ -n "$(git status --porcelain)" ]; then
               git commit -m "Update ZReviewsBot LastModified"
               git push origin HEAD:main -f
