@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: ZMediumToMarkdown Automatic Bot
-      uses: ZhgChgLi/ZMediumToMarkdown@v1.4.6
+      uses: ZhgChgLi/ZMediumToMarkdown@v1.4.7
       with:
         command: '-u zhgchgli'
 
