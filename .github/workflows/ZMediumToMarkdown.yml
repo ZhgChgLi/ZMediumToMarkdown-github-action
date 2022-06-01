@@ -2,7 +2,7 @@ name: ZMediumToMarkdown
 on:
   workflow_dispatch:
   schedule:
-    - cron: "15 */6 * * *"
+    - cron: "10 1 15 * *" # At 01:10 on day-of-month 15.
 
 jobs:
   ZMediumToMarkdown:
