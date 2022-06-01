@@ -9,8 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: ZMediumToMarkdown Automatic Bot
-      uses: ZhgChgLi/ZMediumToMarkdown@v1.4.7
+      uses: ZhgChgLi/ZMediumToMarkdown@main
       with:
-        command: '-u zhgchgli'
+        command: '-p https://medium.com/zrealm-ios-dev/converting-medium-posts-to-markdown-ddd88a84e177'
 
 
