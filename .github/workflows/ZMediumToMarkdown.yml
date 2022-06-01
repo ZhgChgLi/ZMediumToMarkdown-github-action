@@ -5,17 +5,12 @@ on:
   #  - cron: "15 */6 * * *"
 
 jobs:
-  test:
+  ZMediumToMarkdown:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: ruby/setup-ruby@v1
-      - run: gem install ZMediumToMarkdown
-      - run: ZMediumToMarkdown -p https://medium.com/pinkoi-engineering/%E5%AF%A6%E6%88%B0%E7%B4%80%E9%8C%84-4-%E5%80%8B%E5%A0%B4%E6%99%AF-7-%E5%80%8B-design-patterns-78507a8de6a5
-      - uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: "Update fetched posts."
-          commit_user_name: "ZMediumToMarkdown"
-          commit_user_email: "zhgchgli@gmail.com"
-          commit_author: ZMediumToMarkdown <zhgchgli@gmail.com>
+    - name: ZMediumToMarkdown Automatic Bot
+      uses: ZhgChgLi/ZMediumToMarkdown@v1.4.5
+      with:
+        command: '-u zhgchgli'
+
 
