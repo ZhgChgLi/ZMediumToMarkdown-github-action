@@ -1,5 +1,10 @@
 # ZMediumToMarkdown-github-action
 
+### 2023/03/17 Update:
+
+I have just created a brand new GitHub repository template that allows you to move your Medium blog to your own Jekyll blog with just one click. Check it out: [ZMediumToJekyll](https://github.com/ZhgChgLi/ZMediumToJekyll).
+
+---
 Output Result: https://github.com/ZhgChgLi/ZMediumToMarkdown-github-action/tree/main/Output/users/zhgchgli/posts
 
 https://github.com/ZhgChgLi/ZMediumToMarkdown
